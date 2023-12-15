@@ -6,7 +6,9 @@ def get_x_y_ballistic(m, r, V0, alpha) -> tuple[list, list]:
     alpha *= pi / 180  # перевод в радианы
     k_alpha = 0.47  # коэф. сопротивления, по умолчанию 0.47
     po = 1.275  # плотность воздуха при ну
-    k_Fc = k_alpha * pi * r ** 2 * po / 2  # коэф. при силе сопротивления F(v), равен ~ 0.3piR^2
+    k_Fc = (
+        k_alpha * pi * r**2 * po / 2
+    )  # коэф. при силе сопротивления F(v), равен ~ 0.3piR^2
 
     t = 0
     dt = 0.45  # шаг интегрирования
@@ -19,9 +21,11 @@ def get_x_y_ballistic(m, r, V0, alpha) -> tuple[list, list]:
     Vy = V0 * sin(alpha)
 
     while y >= 0:  # численное интегрирование
-        V = sqrt(Vx ** 2 + Vy ** 2)  # текущая скорость
-        Vx += (- k_Fc / m * Vx * V) * dt  # делаем шаг интегрирования проекции ускорения ax = dVx/dt
-        Vy += (- k_Fc / m * Vy * V - g) * dt  # dVy/dt
+        V = sqrt(Vx**2 + Vy**2)  # текущая скорость
+        Vx += (
+            -k_Fc / m * Vx * V
+        ) * dt  # делаем шаг интегрирования проекции ускорения ax = dVx/dt
+        Vy += (-k_Fc / m * Vy * V - g) * dt  # dVy/dt
         x += Vx * dt  # проекции скорости Vx = dx/dt
         y += Vy * dt  # dy/dt
         t += dt  # шаг времени
