@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 from dots_creators import get_x_y_ballistic
-from graph_updaters import simple_update
 from factories import func_animation_factory
 
 app = Flask(__name__)
